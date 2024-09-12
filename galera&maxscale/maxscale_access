@@ -1,9 +1,9 @@
-create user 'maxscale'@'192.168.56.122' identified by '23112@';
+CREATE USER 'maxscale'@'192.168.56.122' IDENTIFIED BY '123@';
 GRANT SELECT ON mysql.user TO 'maxscale'@'192.168.56.122';
 GRANT SELECT ON mysql.db TO 'maxscale'@'192.168.56.122';
 GRANT SELECT ON mysql.tables_priv TO 'maxscale'@'192.168.56.122';
 GRANT SELECT ON mysql.roles_mapping TO 'maxscale'@'192.168.56.122';
 GRANT SHOW DATABASES ON *.* TO 'maxscale'@'192.168.56.122';
-grant Replication slave, Binlog monitor, Replication master admin, Slave monitor on *.* TO 'maxscale'@''192.168.56.122' ';
-grant show databases, slave monitor on *.* to 'maxscale''192.168.56.122' '%';
-GRANT SELECT ON mysql.* TO 'maxscale'@''192.168.56.122' ';
+GRANT REPLICATION SLAVE, BINLOG MONITOR, REPLICATION MASTER ADMIN, SLAVE MONITOR ON *.* TO 'maxscale'@'192.168.56.122';
+GRANT SHOW DATABASES, SLAVE MONITOR ON *.* TO 'maxscale'@'192.168.56.122';
+GRANT SELECT ON mysql.* TO 'maxscale'@'192.168.56.122';
