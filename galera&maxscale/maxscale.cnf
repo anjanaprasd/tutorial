@@ -1,0 +1,64 @@
+[maxscale]
+threads=auto
+admin_host            = 0.0.0.0
+admin_port            = 8989
+admin_secure_gui=false
+
+
+[server1] #ChangeMe you can add your db server hostname here.
+type=server
+address=192.168.56.129
+port=3306
+protocol=MariaDBBackend
+
+[server2]
+type=server
+address=192.168.56.130
+port=3306
+protocol=MariaDBBackend
+
+[server3]
+type=server
+address=192.168.56.131
+port=3306
+protocol=MariaDBBackend
+
+# Monitor configuration to monitor the Galera Cluster nodes
+[Galera-Monitor]
+type=monitor
+module=galeramon
+servers=server1,server2,server3
+user=maxscale
+password=password #passwordofmaxsacleuser
+monitor_interval=2000ms
+
+# Service to handle read/write splitting
+[Read-Write-Service]
+type=service
+router=readwritesplit
+servers=server1,server2
+user=maxscale
+password=password
+
+# Listener for client connections (reads and writes)
+[Read-Write-Listener]
+type=listener
+service=Read-Write-Service
+protocol=MariaDBClient
+port=3306
+
+# Service to handle read-only queries (optional)
+[Read-Only-Service]
+type=service
+router=readconnroute
+router_options=slave
+servers=server3
+user=maxscale
+password=password
+
+# Listener for client connections (reads only)
+[Read-Only-Listener]
+type=listener
+service=Read-Only-Service
+protocol=MariaDBClient
+port=3307
