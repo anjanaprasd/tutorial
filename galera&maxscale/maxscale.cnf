@@ -6,10 +6,10 @@ admin_secure_gui=false
 
 
 [server1] #ChangeMe you can add your db server hostname here.
-type=server
-address=192.168.56.129
-port=3306
-protocol=MariaDBBackend
+type=server #server represents an individual database server to which a client can be connected via MaxScale.
+address=192.168.56.129 #add server ip address here.
+port=3306 #Set the TCP port used to connect to the server
+protocol=MariaDBBackend 
 
 [server2]
 type=server
